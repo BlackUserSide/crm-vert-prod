@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
 
-function App() {
+import "./main.sass";
+import { MainRoutes } from "./routes/MainRouter";
+import { RoutesContext } from "./routes/RoutesContext";
+import { useRoutes } from "./routes/useRoutes";
+import { PreloaderMain } from "./ui/PreloaderMain/PrealoderMain";
+export const App: React.FC = () => {
+  const [preloader, setPreloader] = useState<boolean>(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setPreloader(false);
+    }, 1800);
+  });
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="main-app-wrapper">
+      {preloader ? (
+        <PreloaderMain />
+      ) : (
+        <RoutesContext.Provider value={useRoutes}>
+          <MainRoutes />
+        </RoutesContext.Provider>
+      )}
     </div>
   );
-}
-
-export default App;
+};
