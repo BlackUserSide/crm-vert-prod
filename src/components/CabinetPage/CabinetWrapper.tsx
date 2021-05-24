@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router";
-import { io } from "socket.io-client";
+//import { io } from "socket.io-client";
 import "./cabinet.sass";
+import { MainComposition } from "./CabinetCollection/MainComposition";
 import { HeaderCabinet } from "./HeaderComposition/HeaderCabinet";
 export const CabinetWrapper: React.FC = () => {
   let history = useHistory();
@@ -14,7 +15,7 @@ export const CabinetWrapper: React.FC = () => {
   useEffect(() => {
     const token: string | null = localStorage.getItem("token");
     if (token) {
-      io("http://192.168.0.104:8000", { query: { id: `${token}` } });
+      //io("http://192.168.0.104:8000", { query: { id: `${token}` } });
     }
     return () => {
       console.log("conneted");
@@ -23,6 +24,10 @@ export const CabinetWrapper: React.FC = () => {
   return (
     <div className="cabinet-wrapper">
       <HeaderCabinet />
+      <div className="wrapper-composition">
+        <MainComposition />
+      </div>
     </div>
   );
 };
+//TODO Исправить сокет)

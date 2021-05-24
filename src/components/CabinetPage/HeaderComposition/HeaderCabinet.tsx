@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { getDataUser } from "../../../api/users";
 import logOut from "../../../image/exit.svg";
+import setting from "../../../image/settings.svg";
 interface IDataUser {
   name: string;
   lastName: string;
@@ -13,7 +14,8 @@ export const HeaderCabinet: React.FC = () => {
     name: "",
     lastName: "",
   });
-
+  const [hideSetting, setHideSetting] =
+    useState<boolean | undefined>(undefined);
   useEffect(() => {
     getDataUser()
       .then((res) => {
@@ -25,10 +27,36 @@ export const HeaderCabinet: React.FC = () => {
     localStorage.clear();
     history.push("/");
   };
+  const hideHandler = () => {
+    if (hideSetting) {
+      setHideSetting(false);
+      return;
+    }
+    setHideSetting(true);
+  };
+
   return (
     <div className="header-cabinet">
       <div className="users-data-wrapper">
-        <h3 className="h3">{`${dataUser.name} ${dataUser.lastName}`}</h3>
+        <div className="container-name-user">
+          <h3
+            className="h3"
+            onClick={hideHandler}
+          >{`${dataUser.name} ${dataUser.lastName}`}</h3>
+          <div
+            className={`hide-settings-user  ${
+              hideSetting
+                ? "active-hide"
+                : hideSetting === false
+                ? "hide-op"
+                : ""
+            }`}
+          >
+            <img src={setting} alt="" />
+            <span>Настройка</span>
+          </div>
+        </div>
+
         <img src={logOut} alt="log-out" onClick={logOutWrapper} />
       </div>
     </div>

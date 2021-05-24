@@ -1,3 +1,7 @@
+$blackColor: #2b2a2a
+$orangeColor: #ffd700
+$greyColor: rgba(#fff, .8)
+$colorRed: #ca1c1c
 .cabinet-wrapper
     background: #2b2a2a
     width: 100%
@@ -15,14 +19,175 @@
         display: flex
         align-items: center
         width: 250px
-        
+
         justify-content: space-evenly
         h3
             color: #fff
+            cursor: pointer
         img
             width: 30px
             height: 30px
             cursor: pointer
             &:hover
                 transform: scale(1.1)
-        
+.container-name-user
+    position: relative
+
+    .hide-settings-user
+        position: absolute
+        background-color: rgba(#000, .4)
+        border: 1px solid rgba(#fff, .7)
+        display: flex
+        align-items: center
+        padding: 12px 30px
+        border-radius: 5px
+        opacity: 0
+        bottom: 40px
+        z-index: -2
+
+        span
+            color: #fff
+            display: inline-block
+            cursor: pointer
+            user-select: none
+    .hide-op
+        animation: outFadeOption .3s ease-in-out
+    .active-hide
+        animation: fadeOption .4s ease-in-out forwards
+.wrapper-composition
+    display: flex
+    flex-direction: column
+    align-items: center
+    .main-composition
+        max-width: 1150px
+        width: 100%
+        display: flex
+        flex-direction: column
+.first-composition
+    padding: 35px 0
+    display: flex
+    align-items: center
+    .client-composition
+        flex-grow: 1
+        .h2
+            color: $greyColor
+            font-weight: 500
+            margin-bottom: 30px
+        .number-props
+            display: flex
+            flex-direction: row
+            align-items: center
+            margin-bottom: 30px
+            img
+                width: 20px
+                margin-left: 7px
+                cursor: pointer
+                transition: .3s ease
+                &:hover
+                    transform: scale(1.1)
+            p
+                color: $greyColor
+                font-size: 18px
+
+                span
+                    color: $orangeColor
+                    font-weight: 700
+                    display: inline-block
+                    margin-left: 7px
+    .address-wrapper
+        p
+            color: $greyColor
+
+.controll-panel-client
+    flex-grow: 1
+    border: 2px dashed rgba($orangeColor, .7)
+    padding: 10px 0
+    .h3
+        text-align: center
+        margin-bottom: 30px
+        color: $greyColor
+    .collection-control-btn
+        display: flex
+        flex-direction: column
+        align-items: center
+        span
+            display: inline-block
+            padding: 7px 25px
+            border-radius: 5px
+            margin-bottom: 10px
+            max-width: 90px
+            width: 100%
+            cursor: pointer
+            text-align: center
+            &:nth-child(1)
+                background: rgba($orangeColor, .7)
+                color: #fff
+            &:nth-child(2)
+                background: #367235
+                color: #fff
+            &:nth-child(3)
+                background: $colorRed
+                color: #fff
+            &:nth-child(4)
+                background: #fff
+                color: $blackColor
+
+// POP
+.pop-second-message
+    position: fixed
+    top: 50%
+    left: 50%
+    margin-right: -50%
+    transform: translate(-50%, 50%)
+    background: rgba(#000, 1)
+    border: 2px dashed $orangeColor
+    padding: 28px
+    opacity: .4
+    z-index: 9
+    user-select: none
+    cursor: default
+    animation: messageAnimateIn .4s ease-in-out forwards
+    .h3
+        color: #fff
+.non-active-pop-message
+    animation: messageAnimateOut .4s ease-in-out forwards
+    animation-delay: .8
+
+@keyframes messageAnimateIn
+    0%
+        top: -80px
+    100%
+        top: 50%
+@keyframes messageAnimateOut
+    0%
+        top: 50%
+
+    100%
+        top: -190px
+
+@keyframes fadeOption
+    0%
+        bottom: 40px
+        z-index: -2
+        opacity: 0
+    50%
+        bottom: 0
+        z-index: 0
+        opacity: 1
+    100%
+        bottom: -60px
+        z-index: 2
+        opacity: 1
+@keyframes outFadeOption
+    0%
+        bottom: -60px
+        z-index: 2
+        opacity: 1
+    50%
+        bottom: 0
+        z-index: 0
+        opacity: 1
+    100%
+        bottom: 40px
+        z-index: -2
+        opacity: 0
