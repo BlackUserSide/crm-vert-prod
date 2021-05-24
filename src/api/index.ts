@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "http://192.168.0.105:8000/api/";
+const url = "http://192.168.1.118:8000/api/";
 const instance = axios.create({
   baseURL: url,
   timeout: 1000,
