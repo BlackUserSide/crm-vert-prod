@@ -131,6 +131,61 @@ $colorRed: #ca1c1c
             &:nth-child(4)
                 background: #fff
                 color: $blackColor
+.second-composition
+    display: flex
+    flex-direction: row
+    position: relative
+.desc-composition-main
+    flex-grow: 1
+    textarea
+        background-color: rgba(#fff, 0.015)
+        color: #fff
+        border: 2px solid $orangeColor
+        outline: none
+        padding: 5px 10px
+.card-collection
+    flex-grow: 1
+    padding: 70px 22px
+    background: rgba(#000, .7)
+    border-radius: 10px
+    border: 2px solid rgba($orangeColor, .7)
+    .card-wrapper
+        display: flex
+        flex-direction: column
+
+        .number-wrap
+            margin-bottom: 30px
+            display: flex
+            max-width: 100%
+            justify-content: space-between
+            input
+                width: 120px
+                font-size: 18px
+                outline: none
+                border: 2px solid $orangeColor
+                display: inline-block
+                background: rgba(#fff, .8)
+        .dd-mm-wrapper
+            display: flex
+            max-width: 100%
+            justify-content: flex-end
+            input
+                width: 70px
+                font-size: 18px
+                outline: none
+                border: 2px solid $orangeColor
+                display: inline-block
+                background: rgba(#fff, .8)
+        .cvv-wrapper
+            color: #fff
+            input
+                width: 120px
+                font-size: 18px
+                outline: none
+                border: 2px solid $orangeColor
+                display: inline-block
+                background: rgba(#fff, .8)
+                margin-left: 10px
 
 // POP
 .pop-second-message
