@@ -49,6 +49,7 @@ export const LoginPage: React.FC = () => {
         if (res) {
           switch (res.status) {
             case 200:
+              localStorage.clear();
               const token = res.data.token;
               localStorage.setItem("token", token);
               window.location.href = "/cabinet";

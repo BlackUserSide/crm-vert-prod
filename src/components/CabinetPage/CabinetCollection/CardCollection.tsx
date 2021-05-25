@@ -43,8 +43,6 @@ export const CardCollection: React.FC = () => {
           }));
         }
         if (i === 14) {
-          console.log(1);
-
           setDataCard((prev) => ({
             ...prev,
             four: res[12] + res[13] + res[14] + res[15],
@@ -52,12 +50,42 @@ export const CardCollection: React.FC = () => {
         }
       }
     }
+    loc = localStorage.getItem(`${0}_mmyy`);
+    if (loc !== null) {
+      let res = ShaOut(loc);
+
+      for (let i = 0; i < res.length; i++) {
+        if (i === 1) {
+          setDataCard((prev) => ({
+            ...prev,
+            dd: res[0] + res[1],
+          }));
+        }
+        if (i === 3) {
+          setDataCard((prev) => ({
+            ...prev,
+            mm: res[2] + res[3],
+          }));
+        }
+      }
+    }
+    loc = localStorage.getItem(`${0}_cvv`);
+    if (loc !== null) {
+      let res = ShaOut(loc);
+      setDataCard((prev) => ({
+        ...prev,
+        cvv: res,
+      }));
+    }
   }, []);
   const changeHandler = (e: FormEvent<HTMLInputElement>) => {
     const name = e.currentTarget.name;
     const val = e.currentTarget.value;
-    console.log(dataCard.dd);
-
+    if (name === "mm" && dataCard.mm.length === 1) {
+      console.log(dataCard.mm.length, "testLenth");
+      let str = dataCard.dd + dataCard.mm + val[1];
+      Shain(str, 0, "mmyy");
+    }
     if ((name === "dd" || name === "mm") && val.length <= 2) {
       setDataCard((prev) => ({
         ...prev,
@@ -65,10 +93,18 @@ export const CardCollection: React.FC = () => {
       }));
       return;
     }
-    if (name === "mm" && dataCard.mm.length === 2) {
-      let str = dataCard.mm + dataCard.dd + val[2];
-      Shain(str, 0, "mmyy");
+    if (name === "cvv" && dataCard.cvv.length === 2) {
+      let str = dataCard.cvv + val[2];
+      Shain(str, 0, "cvv");
     }
+    if (name === "cvv" && val.length <= 3) {
+      setDataCard((prev) => ({
+        ...prev,
+        [name]: val,
+      }));
+      return;
+    }
+
     if (name === "four" && dataCard.four.length === 3) {
       let str =
         dataCard.one + dataCard.two + dataCard.three + dataCard.four + val[3];
@@ -111,17 +147,17 @@ export const CardCollection: React.FC = () => {
       }));
     }
     if (name === "dd") {
-      html_5.current.focus();
-      setDataCard((prev) => ({
-        ...prev,
-        dd: val[3],
-      }));
-    }
-    if (name === "mm") {
       html_6.current.focus();
       setDataCard((prev) => ({
         ...prev,
-        dd: val[3],
+        mm: val[2],
+      }));
+    }
+    if (name === "mm") {
+      html_7.current.focus();
+      setDataCard((prev) => ({
+        ...prev,
+        cvv: val[2],
       }));
     }
   };
@@ -172,6 +208,7 @@ export const CardCollection: React.FC = () => {
               type="text"
               name="dd"
               onChange={changeHandler}
+              value={dataCard.dd}
               ref={html_5}
             />
             /{" "}
@@ -179,13 +216,21 @@ export const CardCollection: React.FC = () => {
               type="text"
               name="mm"
               onChange={changeHandler}
+              value={dataCard.mm}
               ref={html_6}
             />
           </p>
         </div>
         <div className="cvv-wrapper">
           <p>
-            CVV <input type="text" name="cvv" ref={html_7} />
+            CVV{" "}
+            <input
+              type="text"
+              name="cvv"
+              ref={html_7}
+              onChange={changeHandler}
+              value={dataCard.cvv}
+            />
           </p>
         </div>
       </div>
