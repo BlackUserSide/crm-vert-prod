@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import copy from "../../../image/copy.svg";
+import { IMainClient } from "../../../types/ClientType";
 import { PopSecondMessage } from "../../../ui/popSecondMessage/PopSecondMessage";
-export const ClientComposition: React.FC = () => {
+type TProps = {
+  dataClient: IMainClient;
+};
+export const ClientComposition: React.FC<TProps> = ({ dataClient }) => {
   const [popUp, setPopUp] = useState<boolean>(false);
   const [className, setClassName] = useState<string>("");
   const copyHandler = (phone: string) => {
@@ -20,22 +24,22 @@ export const ClientComposition: React.FC = () => {
 
   return (
     <div className="client-composition">
-      <h2 className="h2">Малиев Камил Ефредович</h2>
+      <h2 className="h2">{dataClient.name}</h2>
       <div className="number-props">
         <p>
-          Номер: <span>79153758349</span>{" "}
+          Номер: <span>{dataClient.phone}</span>{" "}
         </p>
         <img
           src={copy}
           alt=""
           onClick={() => {
-            copyHandler("7915375834");
+            copyHandler(dataClient.phone);
           }}
         />
       </div>
       <div className="address-wrapper">
         <p>
-          Адресс : <span>Москва Алексеевский Кибальчича 2 1 4</span>
+          Адресс : <span>{dataClient.address}</span>
         </p>
       </div>
       {popUp ? (

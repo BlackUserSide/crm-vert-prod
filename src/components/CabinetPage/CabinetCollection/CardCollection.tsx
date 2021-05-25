@@ -2,8 +2,10 @@ import React, { FormEvent, useEffect, useRef, useState } from "react";
 import { Shain } from "../../../function/stringSha/ShaIn";
 import { ShaOut } from "../../../function/stringSha/ShaOut";
 import { IMainCard } from "../../../types/CardType";
-
-export const CardCollection: React.FC = () => {
+type TProps = {
+  id: number;
+};
+export const CardCollection: React.FC<TProps> = ({ id }) => {
   const [dataCard, setDataCard] = useState<IMainCard>({
     one: "",
     two: "",
@@ -20,7 +22,7 @@ export const CardCollection: React.FC = () => {
   const html_6: any = useRef(null);
   const html_7: any = useRef(null);
   useEffect(() => {
-    let loc = localStorage.getItem(`${0}_card`);
+    let loc = localStorage.getItem(`${id}_card`);
     if (loc !== null) {
       let res = ShaOut(loc);
       for (let i = 0; i < res.length; i++) {
@@ -50,7 +52,7 @@ export const CardCollection: React.FC = () => {
         }
       }
     }
-    loc = localStorage.getItem(`${0}_mmyy`);
+    loc = localStorage.getItem(`${id}_mmyy`);
     if (loc !== null) {
       let res = ShaOut(loc);
 
@@ -69,7 +71,7 @@ export const CardCollection: React.FC = () => {
         }
       }
     }
-    loc = localStorage.getItem(`${0}_cvv`);
+    loc = localStorage.getItem(`${id}_cvv`);
     if (loc !== null) {
       let res = ShaOut(loc);
       setDataCard((prev) => ({
@@ -84,7 +86,7 @@ export const CardCollection: React.FC = () => {
     if (name === "mm" && dataCard.mm.length === 1) {
       console.log(dataCard.mm.length, "testLenth");
       let str = dataCard.dd + dataCard.mm + val[1];
-      Shain(str, 0, "mmyy");
+      Shain(str, id, "mmyy");
     }
     if ((name === "dd" || name === "mm") && val.length <= 2) {
       setDataCard((prev) => ({
@@ -95,7 +97,7 @@ export const CardCollection: React.FC = () => {
     }
     if (name === "cvv" && dataCard.cvv.length === 2) {
       let str = dataCard.cvv + val[2];
-      Shain(str, 0, "cvv");
+      Shain(str, id, "cvv");
     }
     if (name === "cvv" && val.length <= 3) {
       setDataCard((prev) => ({
@@ -108,7 +110,7 @@ export const CardCollection: React.FC = () => {
     if (name === "four" && dataCard.four.length === 3) {
       let str =
         dataCard.one + dataCard.two + dataCard.three + dataCard.four + val[3];
-      Shain(str, 0, "card");
+      Shain(str, id, "card");
     }
     if (val.length <= 4 && name !== "dd" && name !== "mm" && name !== "cvv") {
       setDataCard((prev) => ({
