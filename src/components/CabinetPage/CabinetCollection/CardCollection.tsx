@@ -79,7 +79,7 @@ export const CardCollection: React.FC<TProps> = ({ id }) => {
         cvv: res,
       }));
     }
-  }, []);
+  }, [id]);
   const changeHandler = (e: FormEvent<HTMLInputElement>) => {
     const name = e.currentTarget.name;
     const val = e.currentTarget.value;
