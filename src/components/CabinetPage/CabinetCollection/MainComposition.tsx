@@ -34,14 +34,20 @@ export const MainComposition: React.FC = () => {
 
   return (
     <div className="main-composition">
-      <div className="first-composition">
-        <ClientComposition dataClient={dataClient} />
-        <ControlClient />
-      </div>
-      <div className="second-composition">
-        <DescriptionCompositon id={dataClient.id} />
-        <CardCollection id={dataClient.id} />
-      </div>
+      {dataClient.id !== 0 ? (
+        <>
+          <div className="first-composition">
+            <ClientComposition dataClient={dataClient} />
+            <ControlClient id={dataClient.id} />
+          </div>
+          <div className="second-composition">
+            <DescriptionCompositon id={dataClient.id} />
+            <CardCollection id={dataClient.id} />
+          </div>
+        </>
+      ) : (
+        ""
+      )}
     </div>
   );
 };

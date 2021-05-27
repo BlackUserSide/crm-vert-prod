@@ -49,3 +49,25 @@ export const getDataUser = async () => {
   });
   return response;
 };
+export const cahangePass = async (password: string) => {
+  let response: Ires = {
+    data: "",
+    status: 0,
+  };
+
+  await request({
+    method: "PUT",
+    url: `/admin/update_password`,
+    data: { password: password },
+    validateStatus: () => true,
+  }).then((res) => {
+    if (res) {
+      response = {
+        ...response,
+        data: res.data,
+        status: res.status,
+      };
+    }
+  });
+  return response;
+};

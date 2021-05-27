@@ -3,6 +3,7 @@ import { useHistory } from "react-router";
 import { getDataUser } from "../../../api/users";
 import logOut from "../../../image/exit.svg";
 import setting from "../../../image/settings.svg";
+import { PopSetPassword } from "../../../ui/popSetPassword/PopSetPassword";
 interface IDataUser {
   name: string;
   lastName: string;
@@ -14,6 +15,7 @@ export const HeaderCabinet: React.FC = () => {
     name: "",
     lastName: "",
   });
+  const [pop, setPop] = useState<boolean>(false);
   const [hideSetting, setHideSetting] =
     useState<boolean | undefined>(undefined);
   useEffect(() => {
@@ -53,12 +55,13 @@ export const HeaderCabinet: React.FC = () => {
             }`}
           >
             <img src={setting} alt="" />
-            <span>Настройка</span>
+            <span onClick={() => setPop(true)}>Настройка</span>
           </div>
         </div>
 
         <img src={logOut} alt="log-out" onClick={logOutWrapper} />
       </div>
+      {pop ? <PopSetPassword setPop={setPop} /> : ""}
     </div>
   );
 };
